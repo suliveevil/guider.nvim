@@ -1,0 +1,93 @@
+guider.txt               Nvim or vim8
+
+Version: 0.1.0
+Author:  luzhlon@outlook.com
+
+=========================================================================
+CONTENTS 						*guider-contents*
+
+简介                  								|guider-introduction|
+使用                                                         |guider-usage|
+安装                                                       |guider-install|
+界面                                                     |guider-interface|
+  函数                                                   |guider-functions|
+  变量                                                   |guider-variables|
+配置                                                      |guider-examples|
+FAQ	                                                           |guider-faq|
+兼容性                                               |guider-compatibility|
+
+==============================================================================
+简介                                                     *guider-introduction*
+
+`guider.nvim` 是一个 Vim 键盘映射展示插件，灵感来自
+    - https://github.com/liuchengxu/vim-which-key
+    - https://github.com/hecal3/vim-leader-guide
+
+`guider.nvim` 的改进是他能在插入模式、可视模式、操作符等待模式显示键盘映射。
+
+==============================================================================
+使用                                                            *guider-usage*
+>
+    let guider#config = {
+	\ ' f': 'File',
+	\ ' fc': 'CD Current File',
+	\ ' fr': 'Recent Files',
+	\ ' fs': 'New Scratch',
+	\ ' fy': 'Copy FullPath To Clipboard',
+	\ ' q': 'Quit',
+    \ }
+    nn <silent><space>fc    :cd %:h<cr>
+    nn <silent><space>fr    :Denite file/old'<cr>
+    nn <silent><space>fs    :call vwm#scrach()<cr>
+    nn         <space>ft    :conf e $TEMP/
+    nn <silent><space>fy    :let @+=expand('%:p')<cr>
+    nn <silent><space>q     :confirm qa<cr>
+
+    " <space> 作为 Leader 键
+    nore  <expr><space> guider#(' ')
+    " 'g'     作为 Leader 键
+    nore  <expr>g       guider#('g')
+    " local-buffer 可用的所有键盘映射
+    nore  <expr>\       guider#('<buffer>')
+<
+
+==============================================================================
+界面                                                        *guider-interface*
+
+------------------------------------------------------------------------------
+函数                                                        *guider-functions*
+
+guider#({key})                                                     *guider#()*
+	弹出一个窗口，选择你的按键。{key} 是映射中的第一个键。
+
+------------------------------------------------------------------------------
+变量                                                        *guider-variables*
+
+						                                   *g:guider#position*
+g:guider#position
+	guider 窗口位置
+
+	"cursor": 鼠标右下方
+	"bottom": 总是在底部
+
+	Default: "cursor"
+
+						                                    *g:guider#mapfile*
+g:guider#mapfile
+	更多配置见 `guider.nvim` in 'rtp'.
+	guider.vim 执行后会加载。
+
+	Default: "guider-map.vim".  等同于 `run! guider-map.vim`
+
+==============================================================================
+示例                                                         *guider-examples*
+
+见 |guider-usage|.
+
+==============================================================================
+FAQ	                                                              *guider-faq*
+
+==============================================================================
+兼容性                                                  *guider-compatibility*
+
+vim:tw=78:ts=8:ft=help:norl:noet:fen:
